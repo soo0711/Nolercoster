@@ -12,7 +12,7 @@ public class UserController {
 	public String signUpView(Model model) {
 		model.addAttribute("viewName", "/user/signUp");
 
-		return "template/bakeryLayout";
+		return "template/layout";
 	}
 	
 }
