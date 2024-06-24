@@ -14,7 +14,7 @@ public class NolercosterController {
 
 	@RequestMapping("/home-view")
 	public String homeView(Model model) {
-		model.addAttribute("viewName", "home/homeView");
-		return "home/home";
+		model.addAttribute("viewName", "menu/home");
+		return "template/layout";
 	}
 }
