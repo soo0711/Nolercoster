@@ -44,6 +44,12 @@
             <div class="mb-2 mr-3 signUpMenu">생년월일</div>
             <input class="form-control mb-2  col-7" type="text" id="birth" name="birth">
          </div>
+         
+         <div class="my-2 d-flex">
+            <div class="mb-2 mr-3 signUpMenu">이메일</div>
+            <input class="form-control mb-2  col-7" type="text" id="email" name="email">
+         </div>
+         
  		<div class="d-flex justify-content-center mb-3">
         	<input type="submit" id="signUpBtn" class="btn bg-green mt-4 signUpForm col-9" value="가입하기">
         </div>
