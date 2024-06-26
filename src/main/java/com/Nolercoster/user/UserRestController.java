@@ -51,4 +51,25 @@ public class UserRestController {
 		return result;
 	}
 	
+	@PostMapping("/is-duplicated-id")
+	public Map<String, Object> isDuplicatedId (
+			@RequestParam("loginId") String loginId
+			) {
+		
+		Map<String, Object> result = new HashMap<>();
+		int count = userBO.isDuplicatedId(loginId);
+		if(count > 0) {
+			result.put("code", 200);
+			result.put("is_duplicated_id", true);
+		} else {
+			result.put("code", 200);
+			result.put("is_duplicated_id", false);
+		}
+		
+	
+		
+		return result;
+		
+	}
+	
 }

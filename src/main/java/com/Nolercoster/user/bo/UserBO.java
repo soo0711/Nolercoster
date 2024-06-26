@@ -36,4 +36,14 @@ public class UserBO {
 	public void addUserPrivate(int userId, String salt) {
 		userPrivateBO.addUserPrivate(userId, salt);
 	}
+	
+	public int isDuplicatedId(String loginId) {
+		UserEntity userEntity = userRepository.findByLoginId(loginId);
+		if(userEntity != null) {
+			return 1;
+		} else {
+			return 0;
+		}
+		
+	}
 }

@@ -18,7 +18,7 @@
 	
 		<!--아이디 체크 결과-->
         <div class="my-1">
-        	<div id="idCheckLength" class="text-danger d-none ">ID를 4자 이상 입력해주세요</div>
+        	<div id="idCheckLength" class="text-danger d-none ">ID를 8자 이상 입력해주세요</div>
             <div id="idCheckDupㅉlicated" class="text-danger d-none">중복된 아이디 입니다</div>
             <div id="idCheckOk" class="text-success d-none">사용가능한 아이디 입니다</div>
         </div>		
@@ -70,6 +70,41 @@
 
 <script>
 	$(document).ready(function() {
+		// 중복확인
+		$(".duplicate-btn").on('click', function(e) {
+			e.preventDefault();
+			//alert("중복확인");
+			$("#idCheckLength").addClass("d-none");
+			$("#idCheckDupㅉlicated").addClass("d-none");
+			$("#idCheckOk").addClass("d-none");
+			
+			
+			let loginId = $("#loginId").val().trim();
+			if(loginId.length < 8) {
+				$("#idCheckLength").removeClass("d-none");
+				return false;
+			}
+			
+			$.ajax({
+				type:"POST"
+				,url:"/user/is-duplicated-id"
+				,data:{"loginId":loginId}
+				,success:function(data) {
+					if(data.code == 200) {
+						if(data.is_duplicated_id == true) {// 중복 아이디 일 때
+							$("#idCheckDupㅉlicated").removeClass("d-none");
+						} else {
+							$("#idCheckDuplicated").addClass("d-none");
+							$("#idCheckOk").removeClass("d-none");
+						}
+					} 
+				}
+				,error:function(request, status, error) {
+					alert("아이디 중복확인에 실패했습니다. 관리자에게 문의주세요.");
+				}
+			});//ajax
+			
+		});
 		
 		// 회원가입
 		$("#signUpBtn").on("click",function(e) {
@@ -145,7 +180,6 @@
 			}
 		
 		})
-		
 		
 		}); // - 회원가입 click
 		
