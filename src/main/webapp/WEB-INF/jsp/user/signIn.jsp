@@ -46,6 +46,23 @@
 				return false;
 			}
 			
+			$.ajax({
+				type: "POST"
+				, url: "/user/sign-in"
+				, data: {"loginId" : loginId, "password" : password}
+			
+				, success: function(data){
+					if(data.code == 200){
+						location.href="/nolercoster/home-view";
+					} else{
+						alert(data.error_message);
+						location.reload();
+					}
+				}
+				, error: function(request, status, error){
+					alert("로그인에 실패했습니다. 관리자에게 문의주세요.");
+				}
+			}); // - ajax
 			
 		}); // - signInBtn
 	}); // - doc

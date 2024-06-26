@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Nolercoster.common.EncryptUtils;
 import com.Nolercoster.user.bo.UserBO;
+import com.Nolercoster.user.entity.UserEntity;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
@@ -66,10 +70,50 @@ public class UserRestController {
 			result.put("is_duplicated_id", false);
 		}
 		
-	
-		
 		return result;
 		
+	}
+	
+	@PostMapping("/sign-in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("password") String password,
+			HttpServletRequest request){
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		// id 유무
+		UserEntity user = userBO.getUserEntityByLoginId(loginId);
+		if (user == null) {
+			result.put("code", 500);
+			result.put("error_message", "로그인에 실패했습니다.");
+			return result;
+		}
+		
+		// hasedPassword 만들기
+		// user의 salt 가져오기
+		String salt = userBO.getUserPrivateByUserId(user.getId());	
+		// hasedPassword로 로그인
+		password = encryptUtils.SHA256(password, salt);
+		
+		// loginId - pw 맞는지 확인
+		user = userBO.getUserEntityByLoginIdAndPassword(loginId, password);
+		
+		if (user != null) {
+			// 세션 추가
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+			
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "로그인에 실패했습니다.");
+		}
+		
+		return result;
 	}
 	
 }

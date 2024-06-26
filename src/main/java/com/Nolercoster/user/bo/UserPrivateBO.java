@@ -20,4 +20,8 @@ public class UserPrivateBO {
 				.build()
 				);
 	}
+	
+	public String getUserPrivateByUserId(int userId) {
+		return userPrivateRepository.findByUserId(userId).getSalt();
+	}
 }

@@ -18,7 +18,7 @@
 	
 		<!--아이디 체크 결과-->
         <div class="my-1">
-        	<div id="idCheckLength" class="text-danger d-none ">ID를 8자 이상 입력해주세요</div>
+        	<div id="idCheckLength" class="text-danger d-none ">ID를 4자 이상 입력해주세요</div>
             <div id="idCheckDupㅉlicated" class="text-danger d-none">중복된 아이디 입니다</div>
             <div id="idCheckOk" class="text-success d-none">사용가능한 아이디 입니다</div>
         </div>		
@@ -80,7 +80,7 @@
 			
 			
 			let loginId = $("#loginId").val().trim();
-			if(loginId.length < 8) {
+			if(loginId.length < 4) {
 				$("#idCheckLength").removeClass("d-none");
 				return false;
 			}
@@ -169,7 +169,7 @@
 			, success: function(data){
 				if (data.code == 200){
 					alert("회원가입을 축하합니다!(❁´◡`❁)💖");
-					location.href="/nolercoster/home-view";
+					location.href="/user/sign-in-view";
 				} else {
 					alert(data.error_message);
 				}

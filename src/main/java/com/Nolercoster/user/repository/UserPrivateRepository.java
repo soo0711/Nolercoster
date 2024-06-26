@@ -6,4 +6,5 @@ import com.Nolercoster.user.entity.UserPrivateEntity;
 
 public interface UserPrivateRepository extends JpaRepository<UserPrivateEntity, Integer>{
 
+	public UserPrivateEntity findByUserId(int userId);
 }
