@@ -1,5 +1,7 @@
 package com.Nolercoster.user.bo;
 
+import java.time.ZonedDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,20 @@ public class UserBO {
 			return 0;
 		}
 		
+	}
+	
+	public UserEntity findByUserToken(String userToken) {
+		return userRepository.findByUserToken(userToken);
+	}
+	
+	public UserEntity insertUserByKakao (String userToken, String userName, String signUpFlag, String userProfileImage, String loginProvider) {
+		UserEntity user = UserEntity.builder()
+				.userToken(userToken)
+				.userName(userName)
+				.createdAt(ZonedDateTime.now())
+				.build();
+		
+		return userRepository.save(user);
 	}
 	
 	

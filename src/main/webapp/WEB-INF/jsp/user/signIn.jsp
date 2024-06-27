@@ -22,7 +22,7 @@
         
         <!-- 카카오 로그인 넣기 -->
    		<div class="d-flex justify-content-center mb-3">
-        	<input type="button" id="kakao" class="btn bg-warning mt-2 signUpForm col-9" value="카카오 로그인">
+        	<a href="http://localhost/user/kakaoLogin" id="kakao" class="btn bg-warning mt-2 signUpForm col-9" >카카오 로그인</a>
         </div>
         
         </form>
@@ -65,6 +65,27 @@
 			}); // - ajax
 			
 		}); // - signInBtn
+		
+		/* $("#kakao").on('click', function(){
+			
+			//let nickName = $("#nickName").val();
+			//let signUpFlag = "check";
+			
+				$.ajax({
+				type:"GET"
+				,url:"/user/signUp"
+				,data:{"userName" : nickName, "signUpFlag" : signUpFlag}
+				,success:function(){
+					alert("회원가입 되었습니다.");
+					location.href="http://localhost/danim/kakaoLogin";
+				}
+				,error:function(request, status, error){
+					alert("회원 가입 실패했습니다.");
+				}
+			})
+			
+		}); */
+		
 	}); // - doc
 
 </script>
