@@ -1,6 +1,6 @@
 package com.Nolercoster.user.bo;
 
-import java.time.ZonedDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,5 +78,10 @@ public class UserBO {
 	// input: loginId, pw		output: UserEntity
 	public UserEntity getUserEntityByLoginIdAndPassword(String loginId, String password) {
 		return userRepository.findByLoginIdAndPassword(loginId, password);
+	}
+	
+	// input: X			output: List<UserEntity>
+	public List<UserEntity> getUserList(){
+		return userRepository.findAll();
 	}
 }
