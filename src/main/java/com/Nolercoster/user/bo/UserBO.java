@@ -54,14 +54,7 @@ public class UserBO {
 		return userRepository.findByUserToken(userToken);
 	}
 	
-	public UserEntity insertUserByKakao (String userToken, String userName, String signUpFlag, String userProfileImage, String loginProvider) {
-		UserEntity user = UserEntity.builder()
-				.userToken(userToken)
-				.name(userName)
-				.build();
-		
-		return userRepository.save(user);
-	}
+	
 	
 	
 	// input: loginId		output: UserEntity
@@ -88,4 +81,21 @@ public class UserBO {
 	public UserEntity getUserEntityById(int userId){
 		return userRepository.findById(userId);
 	}
+	
+	public Integer addUserKako(String userToken, String loginProvider, String nickName, String name, String phoneNumber, String email) {
+		UserEntity userEntity = userRepository.save(
+				UserEntity.builder()
+				.userToken(userToken)
+				.name(name)
+				.nickName(nickName)
+				.phoneNumber(phoneNumber)
+				.email(email)
+				.coin(10)
+				.route(loginProvider)
+				.build()
+				);
+		return userEntity == null? null : userEntity.getId(); 
+	}
+
+	
 }

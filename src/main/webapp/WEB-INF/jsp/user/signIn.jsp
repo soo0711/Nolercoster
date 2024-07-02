@@ -22,7 +22,7 @@
         
         <!-- 카카오 로그인 넣기 -->
    		<div class="d-flex justify-content-center mb-3">
-        	<a href="http://localhost/user/kakaoLogin" id="kakao" class="btn bg-warning mt-2 signUpForm col-9" >카카오 로그인</a>
+        	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoApiKey}&redirect_uri=${redirectUri}" id="kakao" class="btn bg-warning mt-2 signUpForm col-9" >카카오 로그인</a>
         </div>
         
         </form>

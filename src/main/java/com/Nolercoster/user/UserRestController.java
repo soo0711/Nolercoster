@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,8 @@ public class UserRestController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	
 
 	@PostMapping("/sign-up")
 	public Map<String, Object> signUp(
@@ -55,6 +58,8 @@ public class UserRestController {
 		return result;
 	}
 	
+	
+	
 	@PostMapping("/is-duplicated-id")
 	public Map<String, Object> isDuplicatedId (
 			@RequestParam("loginId") String loginId
@@ -72,6 +77,32 @@ public class UserRestController {
 		
 		return result;
 		
+	}
+
+	
+	
+	@PostMapping("/sign-up-kakao")
+	public Map<String, Object> signUpKakap(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber,
+			@RequestParam("email") String email,
+			HttpSession session) throws NoSuchAlgorithmException{
+		
+		String userToken = (String) session.getAttribute("userToken");
+		String loginProvider = (String) session.getAttribute("login_provider");
+		String nickName = (String) session.getAttribute("nickName");
+		
+		// user db insert
+		Integer userId = userBO.addUserKako(userToken, loginProvider, nickName, name, phoneNumber, email);
+		
+		// userPrivate db insert - salt
+		//userBO.addUserPrivate(userId, salt);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
 	}
 	
 	@PostMapping("/sign-in")

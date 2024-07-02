@@ -58,16 +58,16 @@ public class KakaoApi {
 //		this.kakaoLogoutRedirectUri = kakaoLogoutRedirectUri;
 //	}
 	
-	@Value("${kakao.ApiKey}")
-	private String kakaoApiKey;
-	
-	@Value("${kakao.RedirectUri}")
-	private String kakaoRedirectUri;
+//	@Value("${kakao.ApiKey}")
+//	private String kakaoApiKey;
+//	
+//	@Value("${kakao.RedirectUri}")
+//	private String kakaoRedirectUri;
 	
 	@Value("${kakao.kakaoLogoutRedirectUri}")
 	private String kakaoLogoutRedirectUri;
 
-	public String getAccessToken(String code) {
+	public String getAccessToken(String code, String kakaoApiKey, String kakaoRedirectUri) {
 		String accessToken = "";
 		String refreshToken = "";
 		String reqUrl = "https://kauth.kakao.com/oauth/token";

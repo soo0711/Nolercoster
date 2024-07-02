@@ -49,7 +49,7 @@ public class KakaoController {
 		// 1. 인가 코드 받기(@RequestParam String code)
 
 		// 2. 토큰받기
-		String accessToken = kakaoApi.getAccessToken(code);
+		String accessToken = kakaoApi.getAccessToken(code, kakaoApiKey,kakaoRedirectUri );
 
 		
 		
@@ -74,9 +74,7 @@ public class KakaoController {
 		}
 
 		
-		//profileImage = user.getUserProfileImage();
 		nickname = user.getName();
-        //model.addAttribute("profile_image", profileImage);
         model.addAttribute("nickname", nickname);
         
 		
@@ -84,7 +82,7 @@ public class KakaoController {
         //로그아웃을 위한 restApikey, redirect URl
         model.addAttribute("kakaoApiKey", kakaoApiKey);
 		model.addAttribute("logoutRedirectUri", kakaoLogoutRedirectUri);
-		return "user/insertDetail";
+		return "user/signIn";
 	}
 
 
@@ -104,20 +102,9 @@ public class KakaoController {
 	}
 	
 	
-
-	@GetMapping("/user/signUp")
-	public void signUp(
-			@RequestParam("userName")String userName, 
-			@RequestParam("signUpFlag")String signUpFlag,
-			HttpSession session) {
-		String userToken = (String) session.getAttribute("userToken");
-		//String profileImage = (String) session.getAttribute("profileImage");
-		String loginProvider = (String) session.getAttribute("login_provider");
-		
-		//insert user
-		//userBO.insertUser(userToken, userName, signUpFlag, profileImage, loginProvider);
 	
-	}
+
+	
 	
 	
 }
