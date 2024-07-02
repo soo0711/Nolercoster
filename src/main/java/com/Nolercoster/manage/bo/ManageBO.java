@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Nolercoster.qna.bo.QnaBO;
-import com.Nolercoster.qna.entity.QnaEntity;
+import com.Nolercoster.qnaCard.bo.QnaCardBO;
+import com.Nolercoster.qnaCard.domain.QnaCard;
 import com.Nolercoster.user.bo.UserBO;
 import com.Nolercoster.user.entity.UserEntity;
 
@@ -17,7 +17,7 @@ public class ManageBO {
 	private UserBO userBO;
 	
 	@Autowired
-	private QnaBO qnaBO;
+	private QnaCardBO qnaCardBO;
 	
 	// input: X 		output: List<UserEntity>
 	public List<UserEntity> getUserList(){
@@ -25,7 +25,7 @@ public class ManageBO {
 	}
 	
 	// input: X 		output: List<QnaEntity>
-	public List<QnaEntity> getQnaList(){
-		return qnaBO.getQnaList();
+	public List<QnaCard> getQnaCardList(){
+		return qnaCardBO.getQnaCardList();
 	}
 }

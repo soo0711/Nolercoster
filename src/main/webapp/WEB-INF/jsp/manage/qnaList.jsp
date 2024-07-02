@@ -17,12 +17,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${qnaList }" var="qna" varStatus="status">
+				<c:forEach items="${qnaCardList }" var="qnaCard" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
-					<td>${qna.subject }</td>
-					<td>${qna.userId }</td>
-					<td>${qna.createdAt }</td>
+					<td>${qnaCard.qna.subject }</td>
+					<td>${qnaCard.user.loginId }</td>
+					<td>${qnaCard.qna.createdAt }</td>
 				</tr>
 				</c:forEach>
 			</tbody>

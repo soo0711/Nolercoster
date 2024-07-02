@@ -83,4 +83,9 @@ public class UserBO {
 	public List<UserEntity> getUserList(){
 		return userRepository.findAll();
 	}
+	
+	// input: X			output: UserEntity
+	public UserEntity getUserEntityById(int userId){
+		return userRepository.findById(userId);
+	}
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Nolercoster.manage.bo.ManageBO;
 import com.Nolercoster.qna.entity.QnaEntity;
-import com.Nolercoster.user.entity.UserEntity;
+import com.Nolercoster.qnaCard.domain.QnaCard;
 
 
 @Controller
@@ -24,10 +24,10 @@ public class ManageController {
 
 	@GetMapping("/qna-list-view")
 	public String qnaListView(Model model) {
-		List<QnaEntity> qnaList = manageBO.getQnaList(); // userId랑 합쳐야함
+		List<QnaCard> qnaCardList = manageBO.getQnaCardList(); 
 		
 		model.addAttribute("viewName", "manage/qnaList");
-		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("qnaCardList", qnaCardList);
 		
 		return "template/layout";
 	}
@@ -38,8 +38,8 @@ public class ManageController {
 			, Model model) {
 		
 		if (menu == 1) { // qna
-			List<QnaEntity> qnaList = manageBO.getQnaList(); // userId랑 합쳐야함
-			model.addAttribute("qnaList", qnaList);
+			List<QnaCard> qnaCardList = manageBO.getQnaCardList(); 
+			model.addAttribute("qnaCardList", qnaCardList);
 			
 			return "manage/qnaList";
 		} 
@@ -49,7 +49,7 @@ public class ManageController {
 		}
 		
 		if (menu == 3) { // user
-			List<UserEntity> userList = manageBO.getUserList();
+			List<QnaCard> userList = manageBO.getQnaCardList();
 			model.addAttribute("userList", userList);
 			
 			return "manage/userList";
