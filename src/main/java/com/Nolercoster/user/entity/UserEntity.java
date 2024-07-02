@@ -38,6 +38,9 @@ public class UserEntity {
 	
 	private String email;
 	
+	@Column(name = "userToken")
+	private String userToken;
+	
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
 	

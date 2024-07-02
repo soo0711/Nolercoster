@@ -16,6 +16,9 @@ import org.springframework.beans.factory.annotation.Value;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -176,13 +179,13 @@ public class KakaoApi {
 			Map<String, Object> kakao_account = (Map<String, Object>) jsonMap.get("kakao_account");
 			String userId = jsonMap.get("id").toString();
 			String nickname = properties.get("nickname").toString();
-			String profileImage = properties.get("profile_image").toString();
+			//String profileImage = properties.get("profile_image").toString();
 
 			//properties={nickname=김채연, profile_image=http://k.kakaocdn.net/dn/bFEkTd/btsGAz2Rp37/xsqhJt8vS4RrtIw6pcxRJK/img_640x640.jpg, thumbnail_image=http://k.kakaocdn.net/dn/bFEkTd/btsGAz2Rp37/xsqhJt8vS4RrtIw6pcxRJK/img_110x110.jpg}
 			//kakao_account={profile_nickname_needs_agreement=false, profile_image_needs_agreement=false, profile={nickname=김채연, thumbnail_image_url=http://k.kakaocdn.net/dn/bFEkTd/btsGAz2Rp37/xsqhJt8vS4RrtIw6pcxRJK/img_110x110.jpg, profile_image_url=http://k.kakaocdn.net/dn/bFEkTd/btsGAz2Rp37/xsqhJt8vS4RrtIw6pcxRJK/img_640x640.jpg, is_default_image=false, is_default_nickname=false}}
 			userInfo.put("userToken", userId);
 			userInfo.put("nickname", nickname);
-			userInfo.put("profileImage", profileImage);
+			//userInfo.put("profileImage", profileImage);
 
 			br.close();
 

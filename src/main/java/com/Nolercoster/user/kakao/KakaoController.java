@@ -55,7 +55,7 @@ public class KakaoController {
 		
 		// 3사용자 정보 받기
 		Map<String, Object> userInfo = kakaoApi.getUserInfo(accessToken);
-		String profileImage = (String) userInfo.get("profileImage");
+		//String profileImage = (String) userInfo.get("profileImage");
 		String nickname = (String) userInfo.get("nickname");
 		String userToken = (String) userInfo.get("userToken");
 
@@ -63,28 +63,28 @@ public class KakaoController {
         session.setAttribute("kakaoToken", accessToken); //로그아웃을 위해 토큰 session에 저장 필요
         session.setAttribute("nickname", nickname);
         session.setAttribute("userToken", userToken); //회원가입을 위해 user 고유 id 저장 필요
-        session.setAttribute("profileImage", profileImage); 
+        //session.setAttribute("profileImage", profileImage); 
 
 		// 3- 1 userId값이 user table 에 없을 때
 		UserEntity user = userBO.findByUserToken(userToken);
 		if (user == null) { // 해당 id를 가진 user가 없다면 회원가입 절차
 			session.setAttribute("login_provider", "kakao"); 
 			
-			return "test/signUp";
+			return "user/insertDetail";
 		}
 
 		
-		profileImage = user.getUserProfileImage();
-		nickname = user.getUserName();
-        model.addAttribute("profile_image", profileImage);
+		//profileImage = user.getUserProfileImage();
+		nickname = user.getName();
+        //model.addAttribute("profile_image", profileImage);
         model.addAttribute("nickname", nickname);
         
 		
         
         //로그아웃을 위한 restApikey, redirect URl
-        model.addAttribute("kakaoApiKey", kakaoApi.getKakaoApiKey());
-		model.addAttribute("logoutRedirectUri", kakaoApi.getKakaoLogoutRedirectUri());
-		return "test/result";
+        model.addAttribute("kakaoApiKey", kakaoApiKey);
+		model.addAttribute("logoutRedirectUri", kakaoLogoutRedirectUri);
+		return "user/insertDetail";
 	}
 
 
@@ -100,7 +100,7 @@ public class KakaoController {
 			System.out.println("로그아웃 완료");
 		}
 		
-		return "redirect:/danim/kakaoLogin";
+		return "redirect:/user/kakaoLogin";
 	}
 	
 	
@@ -111,11 +111,11 @@ public class KakaoController {
 			@RequestParam("signUpFlag")String signUpFlag,
 			HttpSession session) {
 		String userToken = (String) session.getAttribute("userToken");
-		String profileImage = (String) session.getAttribute("profileImage");
+		//String profileImage = (String) session.getAttribute("profileImage");
 		String loginProvider = (String) session.getAttribute("login_provider");
 		
 		//insert user
-		userBO.insertUser(userToken, userName, signUpFlag, profileImage, loginProvider);
+		//userBO.insertUser(userToken, userName, signUpFlag, profileImage, loginProvider);
 	
 	}
 	

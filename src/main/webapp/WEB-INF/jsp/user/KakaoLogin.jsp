@@ -12,8 +12,11 @@
        th:href="@{https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoApiKey}&redirect_uri=${redirectUri}}">
 		<img src="/static/image/kakao_login_medium_narrow.png">
     </a> --%>
+<%--     <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoApiKey}&redirect_uri=${redirectUri}">
+    	<img src="/static/img/kakao_login_medium_narrow.png">
+    </a> --%>
     <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoApiKey}&redirect_uri=${redirectUri}">
-    	<img src="/static/image/kakao_login_medium_narrow.png">
+    	<img src="/static/img/kakao_login_medium_narrow.png">
     </a>
 	</div>
 </body>

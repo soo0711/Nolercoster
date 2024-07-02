@@ -57,8 +57,7 @@ public class UserBO {
 	public UserEntity insertUserByKakao (String userToken, String userName, String signUpFlag, String userProfileImage, String loginProvider) {
 		UserEntity user = UserEntity.builder()
 				.userToken(userToken)
-				.userName(userName)
-				.createdAt(ZonedDateTime.now())
+				.name(userName)
 				.build();
 		
 		return userRepository.save(user);
