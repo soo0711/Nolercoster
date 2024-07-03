@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,11 +94,10 @@ public class UserRestController {
 		// user db insert
 		Integer userId = userBO.addUserKako(userToken, loginProvider, nickName, name, phoneNumber, email);
 		
-		// userPrivate db insert - salt
-		//userBO.addUserPrivate(userId, salt);
 		
 		Map<String, Object> result = new HashMap<>();
 		if(userId != null) {
+			session.setAttribute("userId", userId);
 			result.put("code", 200);
 			result.put("result", "성공");
 		}
@@ -147,6 +145,26 @@ public class UserRestController {
 		}
 		
 		return result;
+	}
+	
+	@PostMapping("/update")
+	public Map<String, Object> update(
+			@RequestParam("password") String password,
+			@RequestParam("nickName") String nickName,
+			@RequestParam("phoneNumber") String phoneNumber,
+			HttpSession session){
+		
+		// userId
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		// update BO
+		userBO.updateUserInfo(userId, password, nickName, phoneNumber);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		return result;
+		
 	}
 	
 }

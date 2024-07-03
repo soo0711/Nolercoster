@@ -12,7 +12,8 @@
 				<tr>
 					<th>No.</th>
 					<th>제목</th>
-					<th>작성자</th>
+					<th>작성자 - 닉네임</th>
+					<th>작성자 - loginId</th>
 					<th>작성 날짜</th>
 				</tr>
 			</thead>
@@ -21,6 +22,7 @@
 				<tr>
 					<td>${status.count }</td>
 					<td>${qnaCard.qna.subject }</td>
+					<td>${qnaCard.user.nickName }</td>
 					<td>${qnaCard.user.loginId }</td>
 					<td>${qnaCard.qna.createdAt }</td>
 				</tr>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Nolercoster.common.EncryptUtils;
 import com.Nolercoster.user.entity.UserEntity;
 import com.Nolercoster.user.repository.UserRepository;
 
@@ -16,6 +17,9 @@ public class UserBO {
 
 	@Autowired
 	private UserPrivateBO userPrivateBO;
+	
+	@Autowired
+	private EncryptUtils encryptUtils;
 	
 	// input: params	output: Integer (Id pk) - 회원가입 
 	public Integer addUser(String loginId, String hasedPassword, String name, String phoneNumber, String email) {
@@ -97,5 +101,57 @@ public class UserBO {
 		return userEntity == null? null : userEntity.getId(); 
 	}
 
+	// input: paramas 		output: void
+	public void updateUserInfo(int userId, String password, String nickName, String phoneNumber) {
+		// 비밀번호 있을시에
+		if (password != "") {
+			String userSalt = userPrivateBO.getUserPrivateByUserId(userId);
+			String hasedPassword = encryptUtils.SHA256(password, userSalt);
+			updatePassword(userId, hasedPassword);
+		}
+		// 닉네임 있을시에
+		if (nickName != "") {
+			updateNickname(userId, nickName);
+		}
+		// 전화번호 있을시에
+		if (phoneNumber != "") {
+			updatephoneNumber(userId, phoneNumber);
+		}
+	}
 	
+	// input: userId, password		output: X
+	public void updatePassword(int userId, String password) {
+		UserEntity user = userRepository.findById(userId);
+		if(user != null) {
+			user = user.toBuilder()
+					.password(password)
+					.build();
+			
+			userRepository.save(user); // 데이터 있으면 수정
+		}
+	}
+	
+	// input: nickname	output: X
+	public void updateNickname(int userId, String nickName) {
+		UserEntity user = userRepository.findById(userId);
+		if(user != null) {
+			user = user.toBuilder()
+					.nickName(nickName)
+					.build();
+			
+			userRepository.save(user); // 데이터 있으면 수정
+		}
+	}
+	
+	// input: nickname	output: X
+	public void updatephoneNumber(int userId, String phoneNumber) {
+		UserEntity user = userRepository.findById(userId);
+		if(user != null) {
+			user = user.toBuilder()
+					.phoneNumber(phoneNumber)
+					.build();
+			
+			userRepository.save(user); // 데이터 있으면 수정
+		}
+	}
 }
