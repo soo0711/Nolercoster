@@ -90,7 +90,7 @@ public class UserRestController {
 		
 		String userToken = (String) session.getAttribute("userToken");
 		String loginProvider = (String) session.getAttribute("login_provider");
-		String nickName = (String) session.getAttribute("nickName");
+		String nickName = (String) session.getAttribute("nickname");
 		
 		// user db insert
 		Integer userId = userBO.addUserKako(userToken, loginProvider, nickName, name, phoneNumber, email);
@@ -99,8 +99,10 @@ public class UserRestController {
 		//userBO.addUserPrivate(userId, salt);
 		
 		Map<String, Object> result = new HashMap<>();
-		result.put("code", 200);
-		result.put("result", "성공");
+		if(userId != null) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		}
 		
 		return result;
 	}

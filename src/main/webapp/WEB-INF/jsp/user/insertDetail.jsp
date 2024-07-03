@@ -30,8 +30,8 @@
 					<span class="mx-2"> - </span>
 					<input type="text" class="form-control my-2" id="phoneEnd">
 				</div>
+			<div class="d-none" id="code" ></div>
          </div>
-         
  		<div class="d-flex justify-content-center mb-3">
         	<input type="submit" id="signUpBtn" class="btn bg-green mt-4 signUpForm col-9" value="가입하기">
         </div>
@@ -40,7 +40,7 @@
 </div>
 
 <script>
-	$(document).ready(function() {
+$(document).ready(function() {
 		
 		// 회원가입
 		$("#signUpBtn").on("click",function(e) {
@@ -51,7 +51,8 @@
 		let phoneMiddle = $("#phoneMiddle").val().trim();
 		let phoneEnd = $("#phoneEnd").val().trim();
 		let phoneNumber = phoneStart + phoneMiddle + phoneEnd;
-		
+		//let code = $("#code").val();
+		//console.log(phoneNumber);
 		
 		if (!name){
 			alert("이름을 입력하세요.");
@@ -76,7 +77,7 @@
 		$.ajax({
 			type: "POST"
 			, url: "/user/sign-up-kakao"
-			, data: {"name": name, "phoneNumber": phoneNumber, "email": email}
+			, data: {"name": name, "phoneNumber": phoneNumber, "email": email }
 		
 			, success: function(data){
 				if (data.code == 200){
@@ -91,7 +92,7 @@
 				alert("회원가입에 실패했습니다. 관리자에게 문의주세요.");
 			}
 		
-		})
+		});
 		
 		}); // - 회원가입 click
 		

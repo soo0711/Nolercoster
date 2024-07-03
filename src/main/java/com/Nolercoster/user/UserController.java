@@ -45,4 +45,14 @@ public class UserController {
 		return "template/layout";
 	}
 	
+	@GetMapping("/sign-in-kakao-view")
+	public String signInKakaoView(Model model) {
+		model.addAttribute("viewName", "/user/insertDetail");
+		
+		return "template/layout";
+	}
+	
+	
+	
+	
 }

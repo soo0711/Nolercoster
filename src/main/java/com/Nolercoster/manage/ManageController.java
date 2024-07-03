@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Nolercoster.manage.bo.ManageBO;
 import com.Nolercoster.qna.entity.QnaEntity;
 import com.Nolercoster.qnaCard.domain.QnaCard;
+import com.Nolercoster.user.entity.UserEntity;
 
 
 @Controller
@@ -49,7 +50,7 @@ public class ManageController {
 		}
 		
 		if (menu == 3) { // user
-			List<QnaCard> userList = manageBO.getQnaCardList();
+			List<UserEntity> userList = manageBO.getUserList();
 			model.addAttribute("userList", userList);
 			
 			return "manage/userList";

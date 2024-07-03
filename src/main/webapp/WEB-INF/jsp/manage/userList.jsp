@@ -11,7 +11,13 @@
 			<thead>
 				<tr>
 					<th>No.</th>
-					<th>유저 이름</th>
+					<th>로그인 아이디</th>
+					<th>이름</th>
+					<th>이메일</th>
+					<th>토큰</th>
+					<th>닉네임</th>
+					<th>루트</th>
+					<th>코인</th>
 					<th>가입 날짜</th>
 				</tr>
 			</thead>
@@ -20,6 +26,12 @@
 				<tr>
 					<td>${status.count }</td>
 					<td>${user.loginId }</td>
+					<td>${user.name }</td>
+					<td>${user.email }</td>
+					<td>${user.userToken }</td>
+					<td>${user.nickName }</td>
+					<td>${user.route }</td>
+					<td>${user.coin }</td>
 					<td>${user.createdAt }</td>
 				</tr>
 				</c:forEach>

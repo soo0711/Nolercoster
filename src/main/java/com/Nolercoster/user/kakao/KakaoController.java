@@ -50,7 +50,7 @@ public class KakaoController {
 
 		// 2. 토큰받기
 		String accessToken = kakaoApi.getAccessToken(code, kakaoApiKey,kakaoRedirectUri );
-
+		//session.setAttribute(code, code);
 		
 		
 		// 3사용자 정보 받기
@@ -69,8 +69,9 @@ public class KakaoController {
 		UserEntity user = userBO.findByUserToken(userToken);
 		if (user == null) { // 해당 id를 가진 user가 없다면 회원가입 절차
 			session.setAttribute("login_provider", "kakao"); 
+			model.addAttribute("code", code);
 			
-			return "user/insertDetail";
+			return "redirect:/user/sign-in-kakao-view";
 		}
 
 		
