@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="content">
-	<div class="d-flex justify-content-center">
-		<h1>관리자 페이지</h1>
-	</div>
-	<jsp:include page="../include/navQna.jsp"></jsp:include>
 	<div class="d-flex justify-content-end mr-3">
 		회원 이름 검색  <input type="text" class="ml-2 mr-2" name="name" id="name">
 		<button class="btn bg-info p-2 ml-2" id="nameSearchBtn">검색</button>
@@ -51,13 +47,11 @@
 			let name = $("#name").val().trim();
 			
 			$.ajax({
-				type:"POST"
+				type:"GET"
 				,url:"/manage/find-user-by-name"
 				,data:{"name":name}
 				,success:function(data) {
-					if(data.code == 200) {
-						
-					} 
+					location.href="/manage/find-user-by-name?name="+name;
 				}
 				,error:function(request, status, error) {
 					alert("이름 검색에 실패했습니다.");

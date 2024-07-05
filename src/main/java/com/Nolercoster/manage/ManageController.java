@@ -30,32 +30,17 @@ public class ManageController {
 		model.addAttribute("viewName", "manage/qnaList");
 		model.addAttribute("qnaCardList", qnaCardList);
 		
-		return "template/layout";
+		return "template/manageLayout";
 	}
 	
-	@GetMapping("/list-view")
-	public String listView(
-			@RequestParam("menu") int menu
-			, Model model) {
+	@GetMapping("/user-list-view")
+	public String listView(Model model) {
 		
-		if (menu == 1) { // qna
-			List<QnaCard> qnaCardList = manageBO.getQnaCardList(); 
-			model.addAttribute("qnaCardList", qnaCardList);
-			
-			return "manage/qnaList";
-		} 
+		List<UserEntity> userList = manageBO.getUserList();
 		
-		if (menu == 2) { // save
-			return "template/layout";
-		}
-		
-		if (menu == 3) { // user
-			List<UserEntity> userList = manageBO.getUserList();
-			model.addAttribute("userList", userList);
-			
-			return "manage/userList";
-		}
-		return "template/layout";
+		model.addAttribute("viewName", "manage/userList");
+		model.addAttribute("userList", userList);
+		return "template/manageLayout";
 	}
 	
 	@GetMapping("/find-user-by-name")
@@ -66,7 +51,8 @@ public class ManageController {
 		
 		List<UserEntity> userList = manageBO.getUserListByName(name);
 		model.addAttribute("userList", userList);
+		model.addAttribute("viewName", "manage/userList");
 		
-		return "manage/userList";
+		return "template/manageLayout";
 	}
 }
