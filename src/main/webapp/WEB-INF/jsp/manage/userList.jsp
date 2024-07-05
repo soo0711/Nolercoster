@@ -6,7 +6,11 @@
 		<h1>관리자 페이지</h1>
 	</div>
 	<jsp:include page="../include/navQna.jsp"></jsp:include>
-	<div class="d-flex justify-content-center">
+	<div class="d-flex justify-content-end mr-3">
+		회원 이름 검색  <input type="text" class="ml-2 mr-2" name="name" id="name">
+		<button class="btn bg-info p-2 ml-2" id="nameSearchBtn">검색</button>
+	</div>
+	<div class="d-flex justify-content-center mt-2">
 		<table class="table text-center">
 			<thead>
 				<tr>
@@ -39,3 +43,28 @@
 		</table>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		$("#nameSearchBtn").on('click', function(){
+			//alert("클릭");
+			let name = $("#name").val().trim();
+			
+			$.ajax({
+				type:"POST"
+				,url:"/manage/find-user-by-name"
+				,data:{"name":name}
+				,success:function(data) {
+					if(data.code == 200) {
+						
+					} 
+				}
+				,error:function(request, status, error) {
+					alert("이름 검색에 실패했습니다.");
+				}
+			});
+			
+			
+		});//nameSearchBtn
+	});
+</script>

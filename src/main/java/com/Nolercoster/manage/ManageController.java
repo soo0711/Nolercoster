@@ -57,4 +57,16 @@ public class ManageController {
 		}
 		return "template/layout";
 	}
+	
+	@GetMapping("/find-user-by-name")
+	public String findUserByName(
+			@RequestParam("name") String name
+			, Model model) {
+		
+		
+		List<UserEntity> userList = manageBO.getUserListByName(name);
+		model.addAttribute("userList", userList);
+		
+		return "manage/userList";
+	}
 }

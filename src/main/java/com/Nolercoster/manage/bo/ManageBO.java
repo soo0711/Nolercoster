@@ -24,8 +24,17 @@ public class ManageBO {
 		return userBO.getUserList();
 	}
 	
+	
+	// input: name 		output: List<UserEntity>
+	public List<UserEntity> getUserListByName(String name){
+		return userBO.getUserListByName(name);
+	}
+	
 	// input: X 		output: List<QnaEntity>
 	public List<QnaCard> getQnaCardList(){
 		return qnaCardBO.getQnaCardList();
 	}
+	
+	
+	
 }

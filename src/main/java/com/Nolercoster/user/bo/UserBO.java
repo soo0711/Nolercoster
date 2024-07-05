@@ -154,4 +154,8 @@ public class UserBO {
 			userRepository.save(user); // 데이터 있으면 수정
 		}
 	}
+	
+	public List<UserEntity> getUserListByName(String name) {
+		return userRepository.findByName(name);
+	}
 }
