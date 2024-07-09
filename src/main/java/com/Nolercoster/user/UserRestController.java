@@ -167,4 +167,14 @@ public class UserRestController {
 		
 	}
 	
+	@PostMapping("/find-pw")
+	public Map<String, Object> findPW (
+			@RequestParam("name") String name,
+			@RequestParam("email") String email) {
+		
+		
+		Map<String, Object> result = new HashMap<>();
+		return result;
+	}
+	
 }
