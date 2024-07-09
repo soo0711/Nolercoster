@@ -94,4 +94,10 @@ public class UserController {
 	}
 	
 	
+	@GetMapping("/find-password-view")
+	public String findPasswordView(Model model) {
+		model.addAttribute("viewName", "/user/findPW");
+		
+		return "template/layout";
+	}
 }
