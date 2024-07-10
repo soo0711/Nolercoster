@@ -172,6 +172,13 @@ public class UserRestController {
 		
 	}
 	
+	/**
+	 * 비밀번호 찾기 API
+	 * @param loginId
+	 * @param email
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/find-pw")
 	public Map<String, Object> findPW (
 			@RequestParam("loginId") String loginId,
@@ -219,7 +226,12 @@ public class UserRestController {
 		
 	}
 	
-	
+	/**
+	 * 아이디 찾기 API
+	 * @param name
+	 * @param email
+	 * @return
+	 */
 	@PostMapping("/find-id")
 	public Map<String, Object> findId(
 			@RequestParam("name") String name,

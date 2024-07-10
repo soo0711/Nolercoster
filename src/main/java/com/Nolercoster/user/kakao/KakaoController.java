@@ -72,18 +72,16 @@ public class KakaoController {
 			model.addAttribute("code", code);
 			
 			return "redirect:/user/sign-in-kakao-view";
-		}
-
+		} 	
 		
 		nickname = user.getName();
         model.addAttribute("nickname", nickname);
-        
-		
+
         
         //로그아웃을 위한 restApikey, redirect URl
         model.addAttribute("kakaoApiKey", kakaoApiKey);
 		model.addAttribute("logoutRedirectUri", kakaoLogoutRedirectUri);
-		return "user/signIn";
+		return "redirect:/nolercoster/home-view";
 	}
 
 
