@@ -120,4 +120,16 @@ public class UserController {
 		model.addAttribute("viewName", "/user/resetPassword");
 		return "template/layout"; 
 	}
+	
+	/**
+	 * 아이디 찾기 화면
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/find-id-view")
+	public String findIdView(Model model) {
+		model.addAttribute("viewName", "/user/findId");
+		
+		return "template/layout";
+	}
 }

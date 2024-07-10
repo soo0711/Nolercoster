@@ -174,11 +174,11 @@ public class UserRestController {
 	
 	@PostMapping("/find-pw")
 	public Map<String, Object> findPW (
-			@RequestParam("name") String name,
+			@RequestParam("loginId") String loginId,
 			@RequestParam("email") String email,
 			HttpSession session) {
 		//이름과 이메일이 일치하는 사용자가 있는지 확인
-		UserEntity user = userBO.getUserEntityByNameAndEmail(name, email);
+		UserEntity user = userBO.getUserEntityByLoginIdAndEmail(loginId, email);
 		Map<String, Object> result = new HashMap<>();
 		if(user != null) {
 			if(user.getPassword() == null) {
@@ -217,5 +217,28 @@ public class UserRestController {
 		
 		return result;
 		
+	}
+	
+	
+	@PostMapping("/find-id")
+	public Map<String, Object> findId(
+			@RequestParam("name") String name,
+			@RequestParam("email") String email){
+	
+		// user select
+		UserEntity user = userBO.getUserEntityByNameAndEmail(name, email);
+		
+		Map<String, Object> result = new HashMap<>();
+	
+		if(user != null) {
+			result.put("code", 200);
+			result.put("loginId", user.getLoginId());
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "가입되지 않은 회원입니다.");
+		}
+		
+		return result;
 	}
 }

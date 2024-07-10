@@ -168,9 +168,10 @@ public class UserBO {
 		return userRepository.findByName(name);
 	}
 	
-	public UserEntity getUserEntityByNameAndEmail(String name, String email) {
-		return userRepository.findByNameAndEmail(name, email);
+	public UserEntity getUserEntityByLoginIdAndEmail(String loginId, String email) {
+		return userRepository.findByLoginIdAndEmail(loginId, email);
 	}
+	
 	
 	public void sendEmail(UserEntity user) {
 		String cetificationCode = mailBO.getCertificationCode();
@@ -178,5 +179,9 @@ public class UserBO {
 		mailBO.mailSend(mail);
 		certificationBO.addCertification(user.getId(), cetificationCode);
 		
+	}
+	
+	public UserEntity getUserEntityByNameAndEmail(String name, String email) {
+		return userRepository.findByNameAndEmail(name, email);
 	}
 }

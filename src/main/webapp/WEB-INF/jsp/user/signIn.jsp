@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <div class="signUp d-flex justify-content-center" >
 	<div class="signUpForm">
 		<div class=" d-flex justify-content-center my-3">
@@ -24,12 +25,10 @@
    		<div class="d-flex justify-content-center mb-3">
         	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoApiKey}&redirect_uri=${redirectUri}" id="kakao" class="btn bg-warning mt-2 signUpForm col-9" >카카오 로그인</a>
         </div>
-        
        	<div class="d-flex justify-content-center mb-3">
        		<a href="/user/find-id-view" class="btn signInForm bg-green">아이디 찾기</a> 
 			<a href="/user/find-password-view" class="btn ml-2 signInForm bg-green">비밀번호 찾기</a> 
        	</div>
-        
         </form>
 	</div>
 </div>
