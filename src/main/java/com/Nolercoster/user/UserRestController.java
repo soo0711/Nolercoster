@@ -184,7 +184,7 @@ public class UserRestController {
 			@RequestParam("loginId") String loginId,
 			@RequestParam("email") String email,
 			HttpSession session) {
-		//이름과 이메일이 일치하는 사용자가 있는지 확인
+		//로그인 아이디와 이메일이 일치하는 사용자가 있는지 확인
 		UserEntity user = userBO.getUserEntityByLoginIdAndEmail(loginId, email);
 		Map<String, Object> result = new HashMap<>();
 		if(user != null) {
@@ -253,4 +253,20 @@ public class UserRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/reset-password")
+	public Map<String, Object> reserPW (
+			@RequestParam("password") String password,
+			HttpSession session) {
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		// update BO
+		userBO.resetPassword(userId, password);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		return result;
+	}
+
 }

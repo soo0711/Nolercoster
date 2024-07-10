@@ -33,7 +33,11 @@ public class CertificationBO {
 	}
 	
 	public void deleteCertification(int userId, String code) {
-		certificationRepository.deleteByCertificationCodeAndUserId(code, userId);
+		CertificationEntity certificationEntity = certificationRepository.findByCertificationCodeAndUserId(code ,userId);
+		if(certificationEntity != null) {
+			certificationRepository.delete(certificationEntity);
+		}
+		
 	}
 	
 	

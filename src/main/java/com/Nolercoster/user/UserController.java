@@ -114,7 +114,11 @@ public class UserController {
 		model.addAttribute("viewName", "/user/checkCertificationCode");
 		return "template/layout";
 	}
-	
+	/**
+	 * 비밀번호 재설정 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/reset-password-view")
 	public String resetPasswordView (Model model) {
 		model.addAttribute("viewName", "/user/resetPassword");

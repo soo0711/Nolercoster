@@ -184,4 +184,10 @@ public class UserBO {
 	public UserEntity getUserEntityByNameAndEmail(String name, String email) {
 		return userRepository.findByNameAndEmail(name, email);
 	}
+	
+	public void resetPassword(int userId, String password) {
+		String userSalt = userPrivateBO.getUserPrivateByUserId(userId);
+		String hasedPassword = encryptUtils.SHA256(password, userSalt);
+		updatePassword(userId, hasedPassword);
+	}
 }
