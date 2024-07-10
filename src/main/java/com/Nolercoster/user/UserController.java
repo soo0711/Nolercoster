@@ -1,12 +1,11 @@
 package com.Nolercoster.user;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Nolercoster.user.bo.UserBO;
@@ -93,11 +92,32 @@ public class UserController {
 		return "template/layout";
 	}
 	
-	
+	/**
+	 * 비밀번호 찾기 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/find-password-view")
 	public String findPasswordView(Model model) {
 		model.addAttribute("viewName", "/user/findPW");
 		
 		return "template/layout";
+	}
+	
+	/**
+	 * 인증 번호 입력화면
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/check-certificationCode-view")
+	public String checkCertificationCodeView (Model model) {
+		model.addAttribute("viewName", "/user/checkCertificationCode");
+		return "template/layout";
+	}
+	
+	@GetMapping("/reset-password-view")
+	public String resetPasswordView (Model model) {
+		model.addAttribute("viewName", "/user/resetPassword");
+		return "template/layout"; 
 	}
 }

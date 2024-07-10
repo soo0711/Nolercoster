@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Nolercoster.certification.bo.CertificationBO;
+import com.Nolercoster.certification.entity.CertificationEntity;
 import com.Nolercoster.common.EncryptUtils;
 import com.Nolercoster.user.bo.UserBO;
 import com.Nolercoster.user.entity.UserEntity;
@@ -26,6 +28,9 @@ public class UserRestController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private CertificationBO certificationBO;
 	
 	
 
@@ -170,11 +175,47 @@ public class UserRestController {
 	@PostMapping("/find-pw")
 	public Map<String, Object> findPW (
 			@RequestParam("name") String name,
-			@RequestParam("email") String email) {
-		
-		
+			@RequestParam("email") String email,
+			HttpSession session) {
+		//이름과 이메일이 일치하는 사용자가 있는지 확인
+		UserEntity user = userBO.getUserEntityByNameAndEmail(name, email);
 		Map<String, Object> result = new HashMap<>();
+		if(user != null) {
+			if(user.getPassword() == null) {
+				result.put("code", 500);
+				result.put("error_message", "카카로 로그인 회원의 비밀번호 찾기는 카카오를 통해 문의주세요");
+			} else {
+				userBO.sendEmail(user);
+				session.setAttribute("userId", user.getId());
+				result.put("code", 200);
+				result.put("result", "성공");
+			}
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "이름과 이메일이 일치하는 회원을 찾지 못 했습니다 정보를 다시 입력해주세요");
+		}
+		
 		return result;
 	}
 	
+	@PostMapping("/check-certificationCode")
+	public Map<String, Object> checkCertificationCode(
+			@RequestParam("code") String code,
+			HttpSession session) {
+		Integer userId = (Integer)session.getAttribute("userId");
+		CertificationEntity certification =certificationBO.getCertificationByCertificationCode(userId, code);
+		Map<String, Object> result = new HashMap<>();
+		if(certification != null) {
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "인증번호가 일치히지 않습니다.");
+		}
+		
+		certificationBO.deleteCertification(userId, code);
+		
+		return result;
+		
+	}
 }

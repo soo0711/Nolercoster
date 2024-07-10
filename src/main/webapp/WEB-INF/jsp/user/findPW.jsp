@@ -25,7 +25,7 @@
 
 <script>
 	$(document).ready(function(){
-		$("#findPwBtn").on('click' function(e){
+		$("#findPwBtn").on('click' ,function(e){
 			e.preventDefault();
 			//alert("클릭");
 			
@@ -51,7 +51,7 @@
 						alert("입력하신 이메일로 인증 코드가 발송되었습니다");
 						location.href="/user/check-certificationCode-view";
 					}else {
-						alert("data.error_message");
+						alert(data.error_message);
 					}
 				}
 				,error:function(request, status, error) {

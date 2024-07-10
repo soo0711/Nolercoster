@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Nolercoster.certification.bo.CertificationBO;
+import com.Nolercoster.certification.bo.MailBO;
+import com.Nolercoster.certification.domain.Mail;
 import com.Nolercoster.common.EncryptUtils;
 import com.Nolercoster.user.entity.UserEntity;
 import com.Nolercoster.user.repository.UserRepository;
@@ -20,6 +23,12 @@ public class UserBO {
 	
 	@Autowired
 	private EncryptUtils encryptUtils;
+	
+	@Autowired
+	private MailBO mailBO;
+	
+	@Autowired 
+	private CertificationBO certificationBO;
 	
 	// input: params	output: Integer (Id pk) - 회원가입 
 	public Integer addUser(String loginId, String hasedPassword, String name, String phoneNumber, String email) {
@@ -157,5 +166,17 @@ public class UserBO {
 	
 	public List<UserEntity> getUserListByName(String name) {
 		return userRepository.findByName(name);
+	}
+	
+	public UserEntity getUserEntityByNameAndEmail(String name, String email) {
+		return userRepository.findByNameAndEmail(name, email);
+	}
+	
+	public void sendEmail(UserEntity user) {
+		String cetificationCode = mailBO.getCertificationCode();
+		Mail mail = mailBO.createMailAndChangePassword(user.getEmail(), cetificationCode);
+		mailBO.mailSend(mail);
+		certificationBO.addCertification(user.getId(), cetificationCode);
+		
 	}
 }
