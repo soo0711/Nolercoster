@@ -73,7 +73,7 @@ public class KakaoController {
 			
 			return "redirect:/user/sign-in-kakao-view";
 		} 	
-		
+		session.setAttribute("userId", user.getId());
 		nickname = user.getName();
         model.addAttribute("nickname", nickname);
 
