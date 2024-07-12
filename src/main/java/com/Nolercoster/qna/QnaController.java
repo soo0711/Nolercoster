@@ -42,4 +42,9 @@ public class QnaController {
 		return "template/layout";
 	}
 	
+	@GetMapping("/qna-detail-view")
+	public String qnaDetailView(Model model) {
+		model.addAttribute("viewName", "/qna/detail");
+		return "template/layout";
+	}
 }
