@@ -55,4 +55,21 @@ public class QnaRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/qna-update")
+	public Map<String, Object> qnaUpdate(
+			@RequestParam("qnaId") int qnaId,
+			@RequestParam("subject") String subject,
+			@RequestParam("context") String context) {
+		
+		// qna update
+		qnaBO.updateContext(qnaId, subject, context);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("qnaId", qnaId);
+		result.put("result", "성공");
+		
+		return result;
+	}
 }

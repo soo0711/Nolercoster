@@ -46,6 +46,15 @@ public class QnaBO {
 		qnaRepository.save(qnaEntity); // 데이터 있으면 수정
 	}
 	
-	
+	// input: X 		output: QnaEntity
+	public void updateContext(int qnaId, String subject, String context) {
+		QnaEntity qnaEntity = qnaRepository.findById(qnaId).orElse(null);
+		qnaEntity = qnaEntity.toBuilder()
+				.subject(subject)
+				.context(context)
+				.updatedAt(LocalDateTime.now())
+				.build();
+		qnaRepository.save(qnaEntity);
+	}
 	
 }

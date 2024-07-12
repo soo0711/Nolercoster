@@ -7,7 +7,7 @@
 		</div>
 		<div class="mt-2">
 			<div class="d-flex justify-content-between p-2 border border-dark">
-				<input type="text" class="ml-4 col-9 border-0" placeholder="제목" value=${qnaCard.qna.subject }>
+				<input type="text" id="subject" class="ml-4 col-9 border-0" placeholder="제목" value="${qnaCard.qna.subject }">
 				<div class="mr-5 text-nowrap">
 					<span class="mr-4">${qnaCard.user.nickName }</span>
 					<span>${qnaCard.qna.updatedAt }</span>
@@ -19,7 +19,7 @@
 		</div>
 		<div class="d-flex justify-content-end my-3">
 			<button type="button" id="deleteBtn" class="btn bg-secondary border border-dark text-white col-2 mr-3">내용 모두 삭제</button>
-			<button type="button" id="updateBtn" class="btn bg-light border border-dark col-2">수정하기</button>
+			<button type="button" id="updateBtn" class="btn bg-light border border-dark col-2" data-qna-id="${qnaCard.qna.id }">수정하기</button>
 		</div>
 	</div>
 </div>
@@ -39,16 +39,28 @@
 			// alert("modify");
 			e.preventDefault();
 			let context = $("#context").val();
+			let subject = $("#subject").val();
+			let qnaId = $(this).data("qna-id");
+			
+			if (!subject){
+				alert("제목을 입력해주세요.");
+				return false;
+			}
+			
+			if (!context){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
 			
 			$.ajax({
 				type: "POST"
 				, url: "/qna/qna-update"
-				, data: {"context" : context}
+				, data: {"qnaId" : qnaId, "subject" : subject, "context" : context}
 			
 				, success: function(data){
 					if (data.code == 200){
 						alert("수정 성공");
-						location.href="/qna/qna-detail-view"
+						location.href="/qna/qna-detail-view?qnaId=" + data.qnaId;
 					} else {
 						alert(data.error_message);
 					}
