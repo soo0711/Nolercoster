@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Nolercoster.manage.bo.ManageBO;
+import com.Nolercoster.qna.bo.QnaBO;
 import com.Nolercoster.qna.entity.QnaEntity;
 import com.Nolercoster.qnaCard.domain.QnaCard;
 import com.Nolercoster.user.entity.UserEntity;
@@ -22,6 +23,9 @@ public class ManageController {
 	
 	@Autowired
 	private ManageBO manageBO;
+	
+	@Autowired
+	private QnaBO qnaBO;
 
 	@GetMapping("/qna-list-view")
 	public String qnaListView(Model model) {
@@ -52,6 +56,17 @@ public class ManageController {
 		List<UserEntity> userList = manageBO.getUserListByName(name);
 		model.addAttribute("userList", userList);
 		model.addAttribute("viewName", "manage/userList");
+		
+		return "template/manageLayout";
+	}
+	
+	@GetMapping("/qna-reply-view")
+	public String qnaReplyView (
+			@RequestParam("qnaId") int qnaId,
+			Model model) {
+		QnaEntity qnaEntity= qnaBO.getQnaEntityById(qnaId);
+		model.addAttribute("qna", qnaEntity);
+		model.addAttribute("viewName", "manage/qnaReply");
 		
 		return "template/manageLayout";
 	}

@@ -25,7 +25,7 @@
 					<span>답변</span>
 				</div>
 			</div>
-			<button type="button" class="btn bg-green border border-dark ml-3 my-3 col-2">답변 쓰기</button>
+			<button type="button" class="btn bg-green border border-dark ml-3 my-3 col-2">수정하기</button>
 		</div>
 	</div>
 </div>

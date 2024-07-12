@@ -8,19 +8,26 @@
 				<tr>
 					<th>No.</th>
 					<th>제목</th>
-					<th>작성자 - 닉네임</th>
 					<th>작성자 - loginId</th>
 					<th>작성 날짜</th>
+					<th>답변 작성 여부</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${qnaCardList }" var="qnaCard" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
-					<td>${qnaCard.qna.subject }</td>
+					<td><a href="/manage/qna-reply-view?qnaId=${status.count}">${qnaCard.qna.subject}</a></td>
 					<td>${qnaCard.user.nickName }</td>
-					<td>${qnaCard.user.loginId }</td>
 					<td>${qnaCard.qna.createdAt }</td>
+					
+						<c:if test="${empty qnaCard.qna.reply}">
+							<td class="text-danger">미작성</td>
+						</c:if>
+						<c:if test="${not empty qnaCard.qna.reply}">
+							<td class="text-primary">작성완료</td>
+						</c:if>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

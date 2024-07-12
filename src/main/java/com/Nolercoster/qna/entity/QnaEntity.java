@@ -1,8 +1,11 @@
 package com.Nolercoster.qna.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.Nolercoster.user.entity.UserEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
+@Builder(toBuilder = true)
 public class QnaEntity {
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,5 +46,5 @@ public class QnaEntity {
 		
 		@Column(name = "updatedAt")
 		@UpdateTimestamp
-		Date updatedAt;
+		LocalDateTime updatedAt;
 }

@@ -40,4 +40,19 @@ public class QnaRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/qna-reply")
+	public Map<String, Object> qnaReply(
+			@RequestParam("qnaId") int qnaId,
+			@RequestParam("reply") String reply,
+			HttpSession session) {
+		qnaBO.updateReply(qnaId, reply);
+		
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
 }
