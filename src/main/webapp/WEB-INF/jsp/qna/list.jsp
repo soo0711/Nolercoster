@@ -21,7 +21,7 @@
 					
 						<tr>
 							<td>${status.count}</td>
-							<td><a href="/qna/qna-detail-view?qnaId=${status.count}">${qnaCard.qna.subject}</a></td>
+							<td><a href="/qna/qna-detail-view?qnaId=${qnaCard.qna.id}">${qnaCard.qna.subject}</a></td>
 							<td>${qnaCard.user.nickName }</td>
 							<td>${qnaCard.qna.createdAt }</td>
 						</tr>

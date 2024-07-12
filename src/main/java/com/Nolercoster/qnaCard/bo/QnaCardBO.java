@@ -21,7 +21,7 @@ public class QnaCardBO {
 	@Autowired
 	private UserBO userBO;
 
-	// input: X 		output: List<QnaEntity>
+	// input: X 		output: List<QnaCard>
 	public List<QnaCard> getQnaCardList(){
 		
 		List<QnaCard> qnaCardList = new ArrayList<>();
@@ -43,5 +43,18 @@ public class QnaCardBO {
 		}
 		
 		return qnaCardList;
+	}
+	
+	// input: qnaId		output: QnaCard
+	public QnaCard getQnaCardById(int qnaId) {
+		QnaCard qnaCard = new QnaCard();
+		
+		QnaEntity qna = qnaBO.getQnaEntityById(qnaId);
+		qnaCard.setQna(qna);
+		
+		UserEntity uesr = userBO.getUserEntityById(qna.getUserId());
+		qnaCard.setUser(uesr);
+		
+		return qnaCard;
 	}
 }

@@ -15,7 +15,7 @@
 			</div>
 		</div>
 		<div class="mt-3 border border-dark min-400">
-			<div class="m-2">
+			<div class="m-2" id="content">
 			 	내용
 			</div>
 		</div>

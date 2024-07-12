@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/review")
 public class ReviewController {
 
+	/**
+	 * 리뷰 상세 페이지
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/review-detail-view")
-	public String detailView(Model model) {
+	public String reviewDetailView(Model model) {
 		model.addAttribute("viewName", "/review/detail");
 		return "template/layout";
 	}

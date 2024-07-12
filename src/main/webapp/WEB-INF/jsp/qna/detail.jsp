@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="d-flex justify-content-center">
 	<div class="col-7">
 		<div class="d-flex justify-content-center">
@@ -7,25 +8,31 @@
 		</div>
 		<div class="mt-2">
 			<div class="d-flex justify-content-between p-2 border border-dark">
-				<span class="ml-5">제목</span>
-				<div class="mr-5">
-					<span class="mr-4">작성자</span>
-					<span>날짜</span>
+				<span class="ml-5">${qnaCard.qna.subject }</span>
+				<div class="mr-5 text-nowrap">
+					<span class="mr-4">${qnaCard.user.nickName }</span>
+					<span>${qnaCard.qna.updatedAt }</span>
 				</div>
 			</div>
 		</div>
 		<div class="mt-3 border border-dark min-400">
-			<div class="m-2">
-			 	내용
+			<div class="m-3">
+			 	${qnaCard.qna.context }
 			</div>
 		</div>
-		<div class="d-flex">
-			<div class="my-3 border border-dark w-100">
-				<div class="m-2">
-					<span>답변</span>
+		<c:if test="${qnaCard.qna.reply ne NULL}">
+			<div class="d-flex">
+				<div class="mt-3 border border-dark w-100">
+					<div class="m-3 min-10">
+						<span>${qnaCard.qna.reply }</span>
+					</div>
 				</div>
 			</div>
-			<button type="button" class="btn bg-green border border-dark ml-3 my-3 col-2">수정하기</button>
-		</div>
+		</c:if>
+		<form action="/qna/qna-update-view?qnaId=${qnaCard.qna.id }" method="POST">
+			<div class="d-flex justify-content-end">
+				<button type="submit" id="btnUpdate" class="btn bg-light border border-dark ml-3 my-3 col-2">수정하기</button>
+			</div>
+		</form>
 	</div>
 </div>

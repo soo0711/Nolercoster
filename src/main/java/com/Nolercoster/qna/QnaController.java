@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Nolercoster.qnaCard.bo.QnaCardBO;
 import com.Nolercoster.qnaCard.domain.QnaCard;
@@ -43,8 +45,22 @@ public class QnaController {
 	}
 	
 	@GetMapping("/qna-detail-view")
-	public String qnaDetailView(Model model) {
+	public String qnaDetailView(
+			@RequestParam("qnaId") int qnaId,
+			Model model) {
+		QnaCard qnaCard = qnaCardBO.getQnaCardById(qnaId);
+		model.addAttribute("qnaCard", qnaCard);
 		model.addAttribute("viewName", "/qna/detail");
+		return "template/layout";
+	}
+	
+	@PostMapping("/qna-update-view")
+	public String qnaUpdateView(
+			@RequestParam("qnaId") int qnaId,
+			Model model) {
+		QnaCard qnaCard = qnaCardBO.getQnaCardById(qnaId);
+		model.addAttribute("qnaCard", qnaCard);
+		model.addAttribute("viewName", "/qna/update");
 		return "template/layout";
 	}
 }
