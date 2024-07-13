@@ -22,7 +22,8 @@
 			<textarea rows="7" cols="115" placeholder="답변" class=" border  border-dark" data-qna-id="${qna.id}" id="reply" name="reply">${qna.reply}</textarea>	
 		</div>
 		<div class="d-flex justify-content-end ">
-			<button class="bg-green btn btn-secondary m-2 col-2" id="qnaReplyBtn">답변 등록</button>
+			<button class="btn btn-secondary m-2 col-2" id="qnaDeleteBtn">내용 모두 지우기</button>
+			<button class="bg-green btn m-2 col-2" id="qnaReplyBtn">답변 등록</button>
 		</div>
 	</div>
 </div>
@@ -48,6 +49,13 @@
 					alert("답글 작성에 실패했습니다");
 				}
 			});
+		});
+		
+		// 답변 내용 지우기 
+		$("#qnaDeleteBtn").on("click", function(e){
+			e.preventDefault();
+			// alert("삭제");
+			$("#reply").val("");
 		});
 		
 	});
